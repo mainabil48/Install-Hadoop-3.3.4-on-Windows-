@@ -1,0 +1,76 @@
+# Install-Hadoop-3.3.4-on-Windows-
+1- install java8 from this link 
+https://www.oracle.com/java/technologies/downloads/#java8
+install it in c:/ 
+2- download Hadoop 3.3.4 from this link 
+https://hadoop.apache.org/release/3.3.4.html
+Decompress the file in c:/ 
+(Java and Hadoop in the same directory)
+3- download hadoop configuration files and copy the bin folder in hadoop configuration and replace it with in Hadoop 3.3.4
+4- in your windows go to Advanced system settings then Environment Variables then  Add New Variable with Hadoop-Home with path C:\hadoop-3.3.4\bin and Java-Home with path C:\Java\jdk1.8.0_351\bin and system variable in edit path and add new C:\hadoop-3.3.4\bin and C:\Java\jdk1.8.0_351\bin
+5- in Hadoop Folder add new folder with data and create datanode folder and namenode folder in him
+6- in Hadoop folder C:\hadoop-3.3.4\etc\hadoop
+Edit 5 files
+core-site.xml
+<configuration>
+<property>
+
+       <name>fs.defaultFS</name>
+
+       <value>hdfs://localhost:9000</value>
+
+   </property>
+</configuration>
+**************************************
+mapred-sit.xml
+<configuration>
+<property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+</configuration>
+**********************************************
+yarn-sit.xml
+<configuration>
+
+<property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.auxservices.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+    </property>
+    <!-- <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+    </property> -->
+
+</configuration>
+**********************************************
+hdfs-sit.xml
+<configuration>
+<property>
+     <name>dfs.replication</name>
+     <value>1</value>
+   </property>
+   <property>
+     <name>dfs.namenode.name.dir</name>
+     <value>C:\hadoop-3.3.4\data\namenode</value>
+   </property>
+   <property>
+     <name>dfs.datanode.data.dir</name>
+     <value>C:\hadoop-3.3.4\data\datanode</value>
+   </property>
+</configuration>
+****************************************
+hadoop-env.cmd
+set JAVA_HOME=C:\Java\jdk1.8.0_351
+******************************************
+7- in CMD 
+cd C:\hadoop-3.3.4\sbin
+hdfs namenode -format
+start-dfs
+start-yarn
+jps
+
