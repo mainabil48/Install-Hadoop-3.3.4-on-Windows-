@@ -3,7 +3,7 @@
 https://www.oracle.com/java/technologies/downloads/#java8
 install it in c:/ 
 2- download Hadoop 3.3.4 from this link 
-https://hadoop.apache.org/release/3.3.4.html
+https://hadoop.apache.org/releases.html
 Decompress the file in c:/ 
 (Java and Hadoop in the same directory)
 3- download hadoop configuration files and copy the bin folder in hadoop configuration and replace it with in Hadoop 3.3.4
